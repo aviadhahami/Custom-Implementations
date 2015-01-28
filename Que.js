@@ -17,6 +17,8 @@ getNext : function(){
             if (this.root){
                 var rdy = this.root;
                 this.root = this.root.next; //we go to next item in list
+                rdy.next = null;
+                return rdy;
             }else return -1;
 },
 insertItem : function(item){ //item is of type qItem
