@@ -50,6 +50,21 @@ class BST{
 		process.stdout.write(node.data + ',');
 		this.printInOrder(node.right);
 	}
+
+	printPreOrder(node){
+		if (node == null) return;
+		process.stdout.write(node.data + ',');
+		this.printInOrder(node.left);
+		this.printInOrder(node.right);
+	}
+
+	printPostOrder(node){
+		if (node == null) return;
+		this.printInOrder(node.left);
+		this.printInOrder(node.right);
+		process.stdout.write(node.data + ',');
+	
+	}
 }
 
 module.exports = BST;
