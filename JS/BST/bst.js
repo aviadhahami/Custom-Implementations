@@ -1,34 +1,55 @@
-node = function() {}
-node.prototype = {
-    right: null,
-    left: null,
-    value: null
+class Node{
+	constructor(val){
+		this.data = val;
+		this.left = null;
+		this.right = null;
+	}
+
+}
+class BST{
+	constructor(vals){
+		this.root = null;
+
+		if(vals){
+			vals.forEach(val =>{
+				this.insert(val);
+			});
+		}
+	}
+
+	insert(val){
+		this._insert(this.root, val);
+	}
+
+	_insert(node, val){
+		if(node == null){
+			// Means root
+			this.root = new Node(val,null,null);
+			return;
+		}
+		if(node.data < val){
+			// Go right
+			if(node.right == null){
+				node.right = new Node(val,null,null);
+			}else{
+				this._insert(node.right,val);				
+			}
+		}else{
+			// Go left
+			if(node.left == null){
+				node.left = new Node(val,null,null);
+			}else{
+				this._insert(node.left,val);				
+			}
+		}
+	}
+
+	printInOrder(node){
+		if (node == null) return;
+		this.printInOrder(node.left);
+		process.stdout.write(node.data + ',');
+		this.printInOrder(node.right);
+	}
 }
 
-BST = function(value) {
-    this.root = value;
-}
-
-BST.prototype = {
-    constructor: BST,
-    insert: function(newNode, currNode) {
-        if (currNode == null) {
-            currNode = newNode;
-            return;
-        }
-        if (newNode.value <= currNode.value) {
-            if (currNode.left == null) {
-                currNode.left = newNode;
-            } else {
-                this.insert(newNode, currNode.left);
-            }
-        } else {
-            if (currNode.right == null) {
-                currNode.right = newNode;
-            } else {
-                this.insert(newNode, currNode.right);
-            }
-        }
-    }
-    
-}
+module.exports = BST;
